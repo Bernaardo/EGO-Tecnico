@@ -1,9 +1,16 @@
 import React from "react";
 import { ModeloProps } from "../../../interfaces/interfaces";
 import { Card, CardHeader, CardMedia } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const ModeloCard: React.FC<ModeloProps> = ({modelo})=> {
+    const navigate = useNavigate();
+
+    const navigateToDetailLoad = () =>{
+        navigate(`/ficha-de-modelo/${modelo.id}`);
+    }
+
     return (
-        <Card>
+        <Card onClick={navigateToDetailLoad}>
             <CardHeader
             title={modelo.name}
             titleTypographyProps={{variant:'h2'}} 
