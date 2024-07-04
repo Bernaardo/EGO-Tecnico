@@ -1,10 +1,104 @@
-import { Typography } from "@mui/material"
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/material"
+import { getModel } from "../../api/modelos";
+import { ModelFeature, ModeloSheet } from "../../interfaces/interfaces";
+import Carousel from "./components/Carousel";
 
 const FichaDeModelo: React.FC = () => {
-    const { id: modelId } = useParams();
+    const { id: modelId } = useParams<{ id: string }>();
+    const [modelo, setModelo] = useState<ModeloSheet>();
+
+    const stripHtml = (html: string | undefined): string => {
+        const elementoTemporal = document.createElement('div');
+        if (!html) return '';
+        elementoTemporal.innerHTML = html;
+        return elementoTemporal.innerText;
+      };
+
+    const getModelSheet = async () =>{
+        if (!modelId) return;
+        try {
+            const {data} = await getModel(modelId);
+            const multiclicateFeatures: ModelFeature[] = [...data.model_features, ...data.model_features, ...data.model_features];
+            setModelo({ ...data, model_features: multiclicateFeatures });
+        } catch (error) {
+            console.error(error);
+        } 
+    }
+
+    useEffect(()=>{
+        getModelSheet();
+    },[modelId])
+
+    if(!modelo) return null;
     return (
-        <Typography>{`Ficha de modelo: ${modelId}`}</Typography>
+        <Grid container display='flex' flexDirection='column' spacing={2}>
+            <Grid item sm={12}>
+            <Card sx={{ 
+                display: 'flex',
+                boxShadow: 'none', 
+                border: 'none', 
+                '&:hover': {
+                  boxShadow: 'none'} }}>
+                <CardMedia
+                    component="img"
+                    sx={{ height: "200px", objectFit: "contain", width: "90%" }}
+                    image={modelo.photo}
+                    alt="Model sheet"
+                />
+                <Box sx={{ display: 'flex', flexDirection: 'column' , width:'70%'}}>
+                    <CardContent sx={{ flex: '1 0 auto', justifyContent:'start', alignItems:'center' }}>
+                        <Typography  variant="h5" >
+                             {modelo.name}
+                        </Typography>
+                        <Typography variant="h2">
+                             {modelo.title}
+                        </Typography>
+                        <Typography variant="h5">
+                             {stripHtml(modelo.description)}
+                        </Typography>
+                    </CardContent>
+                </Box>
+            </Card>
+            </Grid>
+
+            <Grid item  sm={12}>
+            <Carousel data={modelo.model_features}/>
+            </Grid>
+            {modelo.model_highlights.map((highlights, index)=>(
+            <Grid item sm={12}>
+                <Card sx={{ 
+                    display: 'flex',
+                    boxShadow: 'none', 
+                    border: 'none', 
+                    '&:hover': {
+                      boxShadow: 'none'},
+                    flexDirection: index % 2 !== 0 ? 'row' : 'row-reverse'
+                       }}>
+                    <CardMedia
+                        component="img"
+                        sx={{ height: "200px", objectFit: "contain", width: "90%" }}
+                        image={highlights.image}
+                        alt="Model sheet"
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column' , width:'70%'}}>
+                        <CardContent sx={{ flex: '1 0 auto', justifyContent:'start', alignItems:'center' }}>
+                            <Typography  variant="h5" >
+                                 {highlights.title}
+                            </Typography>
+                            <Typography variant="h2">
+                                 {modelo.title}
+                            </Typography>
+                            <Typography variant="h5">
+                                 {stripHtml(highlights.content)}
+                            </Typography>
+                        </CardContent>
+                    </Box>
+                </Card>
+            </Grid>
+            ))}
+        </Grid>
     )
 }
 

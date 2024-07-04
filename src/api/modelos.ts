@@ -13,4 +13,8 @@ export const getAllModels = (filter?:string | null, order?: string | null ) =>{
     return axios.get<Modelo[]>(`${url}`);
 }
 
+export const getModel = (id: string) => {
+    return axios.get(`${MODELS_PATH}/${id}`);
+}
+
 export {};

@@ -19,7 +19,7 @@ const ModeloCard: React.FC<ModeloProps> = ({modelo})=> {
             />
              <CardMedia
                 component="img"
-                alt="product"
+                alt="modelo"
                 sx={{ height: "200px", objectFit: "contain", width: "100%" }}
                 image={modelo.photo}
               />
