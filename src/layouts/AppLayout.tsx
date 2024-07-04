@@ -1,16 +1,42 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Box, Container, Grid, experimentalStyled } from "@mui/material";
 import Header from "../components/appBar/Header";
 import { Outlet } from "react-router-dom";
+import { TopbarHeight } from "../theme/baseTheme";
 
+
+
+const PageWrapper = experimentalStyled('div')(({ theme }) => ({
+    display: 'flex',
+    flex: '1 1 auto',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.default, 
+  
+    [theme.breakpoints.up('lg')]: {
+      paddingTop: TopbarHeight,
+    },
+    [theme.breakpoints.down('lg')]: {
+      paddingTop: '64px',
+    },
+  }));
 const AppLayout: React.FC = () =>{
     return (
-        <Grid >
+        <>
             <Header/>
-            <Grid>
+            <PageWrapper>
+        <Container
+          maxWidth={false}
+          sx={{
+            paddingTop: '20px',
+            minWidth:  "95%",
+          }}
+        >
+          <Box sx={{ minHeight: 'calc(100vh - 170px)' }}>
             <Outlet />
-          </Grid>
-        </Grid>
+          </Box>
+        </Container>
+      </PageWrapper>
+        </>
     )
 }
 

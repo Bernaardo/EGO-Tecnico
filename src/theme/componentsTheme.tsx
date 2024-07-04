@@ -4,32 +4,31 @@ const components: Components<Theme>={
  
   MuiContainer: {
     styleOverrides: {
-      root: {
+      root: (props) => ({
         paddingLeft: '15px !important',
         paddingRight: '15px !important',
         maxWidth: '1600px',
-      },
+        backgroundColor: props.theme.palette.background.default, 
+      }),
     },
   },
 
   MuiButton: {
     styleOverrides: {
-      root: {
+      root: (props) => ({
         textTransform: 'none',
         boxShadow: '0px 2px 10px 0px rgba(8, 94, 162, 0.5)',
         fontSize: '22px',
         lineHeight: '24px',
         fontWeight: '500',
+        borderRadius: '7px',
+        color: props.theme.palette.primary.contrastText,
+        backgroundColor: props.theme.palette.primary.main,
         '&:hover': {
           boxShadow: 'none',
+          backgroundColor: props.theme.palette.action.hover, 
         },
-        borderRadius: '7px',
-        color: '#ffffff',
-       ' & hover': {
-          boxShadow: 'none',
-          backgroundColor: '#0078D3'
-      }
-      },
+      }),
       sizeMedium: {
         paddingTop: '14px',
         paddingBottom: '14px',
@@ -58,12 +57,16 @@ const components: Components<Theme>={
 
   MuiCard: {
     styleOverrides: {
-      root: {
-        borderRadius: '7px',
+      root: (props) => ({
+        borderRadius: '0px',
         padding: '3px',
         margin: '3px',
-        boxShadow: '0px 7px 30px 0px rgba(90, 114, 123, 0.25)',
-      },
+        boxShadow: props.theme.shadows[0],
+        transition: 'box-shadow 0.3s ease',
+        '&:hover': {
+          boxShadow: props.theme.shadows[4],
+        },
+      }),
     },
   },
 
@@ -83,71 +86,32 @@ const components: Components<Theme>={
       },
     },
   },
-  MuiLinearProgress: {
-    styleOverrides: {
-      root: {
-        backgroundColor: '#ecf0f2',
-        borderRadius: '6px',
-      },
-    },
-  },
-  MuiMenuItem: {
-    styleOverrides: {
-      root: {
-        borderRadius: '0',
-      },
-    },
-  },
-  MuiChip: {
-    styleOverrides: {
-      root: {
-        fontWeight: '500',
-        fontSize: '0.75rem',
-      },
-    },
-  },
-  MuiTableCell: {
-    styleOverrides: {
-      body: {
-        maxHeight: '51px',
-        lineHeight: '16px',
-        paddingTop: '8px',
-        paddingBottom: '8px',
-      },
-    },
-  },
-  MuiTextField: {
-    styleOverrides: {
-      root: {
-        '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: '#1a97f5', 
-        },
-      },
-    },
-  },
-  MuiOutlinedInput: {
+
+  MuiTabs: {
     styleOverrides: {
       root: (props) => ({
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: 'none',
+        backgroundColor: props.theme.palette.background.default, 
+      }),
+      indicator: (props) => ({
+        backgroundColor: props.theme.palette.secondary.main, 
+      }),
+    },
+  },
+
+  MuiTab: {
+    styleOverrides: {
+      root: (props) => ({
+        '&.Mui-selected': {
+          color: props.theme.palette.secondary.main, 
         },
-        '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: props.theme.palette.primary.light + ' !important',
+        '&.Mui-focusVisible': {
+          backgroundColor: props.theme.palette.secondary.main, 
         },
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: props.theme.palette.primary.dark + ' !important',
+        '&:hover': {
+          backgroundColor: props.theme.palette.action.hover,
         },
-        '& .MuiOutlinedInput-input::placeholder': {
-          color: props.theme.palette.text.secondary,
-          opacity: '1',
-        },
-        '& .MuiOutlinedInput-input.Mui-disabled': {
-          backgroundColor: props.theme.palette.grey.A100,
-        },
-        '& .MuiOutlinedInput-input.Mui-disabled::placeholder': {
-          color: props.theme.palette.grey.A700,
-          opacity: '1',
-        },
+        color: props.theme.palette.secondary.contrastText, 
+        borderBottom: `4px solid ${props.theme.palette.secondary.main}`,
       }),
     },
   },

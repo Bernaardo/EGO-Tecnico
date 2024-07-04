@@ -39,19 +39,8 @@ const Modelos: React.FC = () =>{
         getModels(filter, order)
     },[filter, order])
 
-    if (loading) {
-        return (
-            <Box marginTop={4} sx={{
-                height: 'calc(100vh - 64px)',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-            <CircularProgress color="secondary" size={50}/>
-          </Box>)
-      }
     return (
-        <Box p={2} marginTop={4}>
+        <>
             {error ? 
             <Grid
             sx={{
@@ -78,16 +67,25 @@ const Modelos: React.FC = () =>{
             <>
             <Typography variant="h1">Descubrí todos los modelos</Typography>
             <FilterModelsBar handleButtonFilter={handleButtonFilter} handleOrderSelect={handleOrderSelect}/>
-            <Grid container display='flex' flexDirection='row' spacing={2}>
+            {loading?
+            <Box  sx={{
+                height: 'calc(100vh - 300px)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+            <CircularProgress color="secondary" size={50}/>
+          </Box>:
+                <Grid container display='flex' flexDirection='row' spacing={2}>
             {models.map((model: Modelo, index: number)=>(
                 <Grid item md={3} sm={12} xs={12} key={`model-${model.id}`} >
                     <ModeloCard modelo={model} />
                 </Grid>
             ))}
-            </Grid>
+            </Grid>}
             </>
             }
-        </Box>
+        </>
     )
 }
 
