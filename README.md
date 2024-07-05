@@ -1,6 +1,6 @@
 # Challenge Ego
 
-Este proyecto es una aplicación de React diseñada para [propósito del proyecto]. Está construido utilizando React, TypeScript y Material-UI.
+Este proyecto es una aplicación de React diseñada para una prueba técnica. Está construido utilizando React, TypeScript y Material-UI.
 
 ## Empezando
 
