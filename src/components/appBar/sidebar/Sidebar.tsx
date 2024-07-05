@@ -1,5 +1,5 @@
 import React from "react";
-import { Drawer, Grid, IconButton, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { Box, Drawer, Grid, IconButton, List, ListItem, ListItemText, Typography, useTheme } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { SidebarItem, SidebarProps } from "../../../interfaces/interfaces";
 import sidebarItems from "./sidebarItems";
@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 
 const Sidebar: React.FC <SidebarProps>=({open, handleClick})=>{
+    const theme = useTheme();
 
     const renderListItem = (item:SidebarItem, index: number, grayGrup?: boolean) => (
         
@@ -38,14 +39,13 @@ const Sidebar: React.FC <SidebarProps>=({open, handleClick})=>{
         sx={{
             '& .MuiDrawer-paper': {
                 width: '250px',
-                backgroundColor: '#f0f0f0',
                 
             },
             
         }}
     >
         <Grid container direction="column" >
-            <Grid item sx={{ display: 'flex', justifyContent: 'flex-end', marginBottom:0, paddingBottom:0, backgroundColor:'#ffffff'}}>
+            <Grid item sx={{ display: 'flex', justifyContent: 'flex-end', marginBottom:2, paddingBottom:0, backgroundColor:'#ffffff'}}>
                 <IconButton onClick={handleClick(false)} style={{justifyContent: 'flex-end'}}>
                     <CloseIcon />
                 </IconButton>
@@ -59,16 +59,17 @@ const Sidebar: React.FC <SidebarProps>=({open, handleClick})=>{
                 <List>
                         {sidebarItems.slice(0, 4).map((item, index)=>renderListItem(item, index,))}
 
-                        <ListItem sx={{marginBottom:0.5}} />
+                        <Box sx={{marginBottom:2, marginTop:2, padding:0.2,backgroundColor: theme.palette.info.main}}/>
 
                         {sidebarItems.slice(4, 7).map((item, index)=>renderListItem(item, index,))}
 
-                        <ListItem sx={{marginBottom:0.5 }} />
+                        <Box sx={{marginBottom:2, marginTop:2, padding:0.2,backgroundColor: theme.palette.info.main}}/>
 
                         {sidebarItems.slice(7, 10).map((item, index)=>renderListItem(item, index,))}
-                        <ListItem sx={{ marginBottom:2 }} />
 
+                        <Box sx={{marginBottom:2, marginTop:2, paddingTop:5, paddingBottom:5,backgroundColor: theme.palette.info.main}}>
                         {sidebarItems.slice(10).map((item, index)=>renderListItem(item, index, true))}
+                        </Box>
                     </List>
             </Grid>
         </Grid>
