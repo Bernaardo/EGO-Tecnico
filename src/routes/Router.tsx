@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
-import Loadable from '../components/loadable/Loadable';
+import Loadable from '../components/loader/Loadable';
 
 const AppLayout = Loadable(lazy(() => import("../layouts/AppLayout")));
 const Modelos = Loadable(lazy(() => import("../pages/modelos/Modelos")));

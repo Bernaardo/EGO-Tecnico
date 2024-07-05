@@ -96,3 +96,8 @@ export interface FilterModelsSelectProps {
     handleSelected: (item: ButtonFilterItem) => void;
     itemType: string | null;
 }
+
+export interface HighlightsProps {
+    highlight: ModelHighlight;
+    index: number;
+}

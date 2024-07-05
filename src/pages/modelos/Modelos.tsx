@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
-import { Box, CircularProgress, Grid, Typography, useTheme } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 import FilterModelsBar from "./components/FilterModelsBar";
 import { getAllModels } from "../../api/modelos";
 import { ButtonFilterItem, Modelo, OrdenarPorItem } from "../../interfaces/interfaces";
-import WifiOffIcon from '@mui/icons-material/WifiOff';
 import ModeloCard from "./components/ModeloCard";
+import ServerError from "../../components/loader/ServerError";
+import Loading from "../../components/loader/Loading";
 
 const Modelos: React.FC = () =>{
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const theme = useTheme();
     const [models, setModels] = useState<Modelo[]>([]);
     const [filter, setFilter] = useState<string | null>(null);
     const [order, setOrder] = useState<string | null>(null);
@@ -43,27 +43,7 @@ const Modelos: React.FC = () =>{
     return (
         <Grid container display='flex' direction='column' justifyContent='center'>
         {error ? 
-        <Grid item
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          height: '50vh',
-        }}
-        >
-            <WifiOffIcon
-            fontSize="large"
-            sx={{ width: '10rem', height: '10rem', color: theme.palette.primary.main }}
-            />
-            <Typography variant="h3">Server Errpr</Typography>
-            <Typography variant="h4" textAlign="center" py={0.5}>
-            En estos momentos no podemos mostrar la información solicitada
-            </Typography>
-            <Typography variant="h4" textAlign="center" py={0.5}>
-            Vuelve a intenterlo mas tarde
-            </Typography>
-        </Grid>
+        <ServerError/>
             :
         <Grid item container sm={12} display='flex' justifyContent='center' direction='row' sx={{paddingRight:'15px'}}>
             <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'start', paddingLeft:{xs:'0px',sm:'90px'}}}>
@@ -73,14 +53,7 @@ const Modelos: React.FC = () =>{
             <FilterModelsBar handleButtonFilter={handleButtonFilter} handleOrderSelect={handleOrderSelect} filterType={filter} orderType={order}/>
             </Grid>
             {loading ?
-            <Box  sx={{
-                height: 'calc(100vh - 300px)',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-            <CircularProgress color="secondary" size={50}/>
-            </Box>
+            <Loading/>
             :
             <Grid item container sx={{display:'flex', justifyContent:'start', marginLeft:5, marginRight:5}} >
             {models.map((model: Modelo, index: number)=>(

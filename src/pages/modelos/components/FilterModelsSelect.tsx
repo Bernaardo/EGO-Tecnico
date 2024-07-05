@@ -43,12 +43,12 @@ const FilterModelsSelect: React.FC <FilterModelsSelectProps>= ({items, handleSel
                         }}
                         PaperProps={{ sx: { borderRadius: 0,
                              width: '170px', 
-                            height: '182px' } }}
+                            height: '193px' } }}
                     >
                     <List sx={{padding:0, margin:0}}>
                         {
                             items.map((item: ButtonFilterItem, index: number)=>(
-                        <ListItem sx={{height:'35.7px', margin:0}} selected={(item.segment===itemType)} disablePadding key={`order-item-${index}`}>
+                        <ListItem sx={{height:'35.7px', marginTop:0.3}} selected={(item.segment===itemType)} disablePadding key={`order-item-${index}`}>
                             <ListItemButton 
                                 divider 
                                 onClick={()=> {

@@ -4,26 +4,31 @@ import { Box, Card, CardContent, CardMedia, Grid, Typography } from "@mui/materi
 import { getModel } from "../../api/modelos";
 import { ModelFeature, ModeloSheet } from "../../interfaces/interfaces";
 import Carousel from "./components/Carousel";
+import ServerError from "../../components/loader/ServerError";
+import Loading from "../../components/loader/Loading";
+import Highlights from "./components/Highlights";
+import { stripHtml } from "../../hooks/extraerHtml";
 
 const FichaDeModelo: React.FC = () => {
   const { id: modelId } = useParams<{ id: string }>();
+  const [loading, setLoading] = useState(false);
   const [modelo, setModelo] = useState<ModeloSheet>();
+  const [error, setError] = useState(false);
 
-  const stripHtml = (html: string | undefined): string => {
-    const elementoTemporal = document.createElement('div');
-    if (!html) return '';
-    elementoTemporal.innerHTML = html;
-    return elementoTemporal.innerText;
-  };
+ 
 
   const getModelSheet = async () => {
-    if (!modelId) return;
+    if(!modelId) return;
+    setLoading(true);
     try {
       const { data } = await getModel(modelId);
       const multiclicateFeatures: ModelFeature[] = [...data.model_features, ...data.model_features, ...data.model_features];
       setModelo({ ...data, model_features: multiclicateFeatures });
     } catch (error) {
       console.error(error);
+      setError(true);
+    } finally {
+        setLoading(false);
     }
   };
 
@@ -34,7 +39,13 @@ const FichaDeModelo: React.FC = () => {
   if (!modelo) return null;
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} justifyContent='center'>
+         {error ? 
+         <ServerError/>
+         : loading? 
+         <Loading/>
+         :
+         <>
       <Grid item xs={12} sm={6}  sx={{marginBottom:4}}>
         <Card 
           sx={{ 
@@ -75,62 +86,10 @@ const FichaDeModelo: React.FC = () => {
         <Carousel data={modelo.model_features} />
     </Grid> 
 
-      {modelo.model_highlights.map((highlights, index) => (
-        <Grid item container display='flex' flexDirection={index % 2 !== 0 ? 'row' : 'row-reverse'} justifyContent='center' marginLeft={{sm: index % 2 !== 0 ? -2 : 4, xs:0}} marginBottom={2} key={`highlights-${index}`}>
-          <Grid item xs={12} sm={5}>
-            <Card 
-              sx={{ 
-                padding: 0,
-                borderRadius: 2,
-                marginTop: 2,
-                flexShrink: 0,
-                height: '220px',
-                display: 'flex',
-                boxShadow: 'none',
-                border: 'none',
-                '&:hover': {
-                  boxShadow: 'none'
-                }
-              }}
-            >
-              <CardMedia
-                component="img"
-                sx={{ 
-                  height: "220px",
-                  width: "100%",
-                  objectFit: "cover"
-                }}
-                image={highlights.image}
-                alt="Model sheet"
-              />
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={5} display='flex' justifyContent='center' >
-            <Card 
-              sx={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                width: { xs: '100%', sm: '80%' }, 
-                marginTop: 2, 
-                alignItems: 'center', 
-                boxShadow: 'none',
-                '&:hover': {
-                  boxShadow: 'none'
-                }
-              }}
-            >
-              <CardContent>
-                <Typography variant="h2">
-                  {highlights.title}
-                </Typography>
-                <Typography variant="h5">
-                  {stripHtml(highlights.content)}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+      {modelo.model_highlights.map((highlight, index) => (
+        <Highlights highlight={highlight} index={index}/>
       ))}
+      </>}
     </Grid>
   );
 };
