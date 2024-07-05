@@ -6,7 +6,7 @@ const components: Components<Theme>={
     styleOverrides: {
       root: (props) => ({
         paddingLeft: '15px !important',
-        paddingRight: '15px !important',
+        paddingRight: '0px !important',
         maxWidth: '1600px',
         backgroundColor: props.theme.palette.background.default, 
       }),
@@ -23,7 +23,6 @@ const components: Components<Theme>={
         fontWeight: '500',
         borderRadius: '7px',
         color: props.theme.palette.primary.contrastText,
-        backgroundColor: props.theme.palette.primary.main,
         '&:hover': {
           boxShadow: 'none',
           backgroundColor: props.theme.palette.action.hover, 
@@ -49,9 +48,14 @@ const components: Components<Theme>={
 
   MuiListItem: {
     styleOverrides: {
-      root: {
+      root: (props) => ({
         borderRadius: '0px',
-      },
+        border:'none',
+        backgroundColor: props.theme.palette.primary.main,
+        "&.Mui-selected": {
+          backgroundColor: props.theme.palette.info.main,
+        },
+      }),
     },
   },
 

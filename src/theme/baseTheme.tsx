@@ -29,6 +29,9 @@ const baseTheme: ThemeOptions = {
     background: {
       default: '#ffffff', 
     },
+    info:{
+      main:'#0000001A'
+    },
     text: {
       secondary: '#777e89',
     },

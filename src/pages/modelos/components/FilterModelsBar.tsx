@@ -2,81 +2,39 @@ import React, { useState } from "react"
 import { Box, Button, Grid, IconButton, List, ListItem, ListItemButton, ListItemText, Popover, Typography } from "@mui/material"
 import { ButtonFilterItem, FilterModelsProps, OrdenarPorItem } from "../../../interfaces/interfaces";
 import { buttonFilterItems, ordernarPorItems } from "./filterOrderItems";
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import OrderModels from "./OrderModels";
+import FilterModelsSelect from "./FilterModelsSelect";
 
-const FilterModelsBar: React.FC<FilterModelsProps> = ({handleButtonFilter, handleOrderSelect}) =>{
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const openPopover = Boolean(anchorEl);
 
-    const handeOrderAction = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-      };
-    
-      const handleCloseOrderAction = () => {
-        setAnchorEl(null);
-      };
+const FilterModelsBar: React.FC<FilterModelsProps> = ({handleButtonFilter, handleOrderSelect, filterType, orderType}) =>{
+  
 
     return (
-        <Box sx={{border:2, display:'flex', flexDirection:'row', justifyContent: 'space-evenly'}}>
-                <Grid item container sx={{display:'flex', justifyContent: 'start'}}>
+        <Box sx={{borderBottom: '3px solid rgba(0, 0, 0, 0.1)', display:'flex',flexDirection:'row', justifyContent: 'space-between', alignItems:'center', height:'41',width:'1141px'}}>
+                <Grid item sm={10} container sx={{display: {xs: 'none', sm: 'flex'}, justifyContent: 'start', alignItems:'center'}}>
                     <Grid item sx={{marginLeft:2, marginRight:2}}>
-                        <Typography variant="h5">Filtrar por</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Filtrar por</Typography>
                     </Grid>
                 {buttonFilterItems.map((filter: ButtonFilterItem, index: number) => (
-                    <Grid item key={`buttons-filter-${index}`}>
                     <Button
-                        key={index}
+                        key={`buttons-filter-${index}`}
                         variant="contained"
                         size="small"
-                        color="primary"
+                        color= {filter.segment=== filterType? "info": "primary"}
                         onClick={() => handleButtonFilter(filter)}
-                        sx={{ marginRight: 2 }}
+                        sx={{marginLeft:1,marginRight:1, boxShadow:'none'}}
                     >
-                        <Typography variant="h5">{filter.title}</Typography>
+                        <Typography variant="h6">{filter.title}</Typography>
                     </Button>
-                    </Grid>
                 ))}
                 </Grid>
 
-                <Grid item container sx={{display:'flex', justifyContent: 'flex-end', alignItems:'center'}}>
-                    <Grid item sx={{ borderRadius:0}}>
-                    <Typography variant="h5">Ordenar por</Typography>
-                    </Grid>
-                    <Grid item sx={{ borderRadius:0}}>
-                    <IconButton sx={{display:'flex', borderRadius:0}} onClick={handeOrderAction} >
-                        <ExpandMoreIcon />
-                    </IconButton>
-                    </Grid>
-                    <Popover
-                        id="optionsLanguages"
-                        open={openPopover}
-                        anchorEl={anchorEl}
-                        onClose={handleCloseOrderAction}
-                        anchorOrigin={{
-                          vertical: 'bottom',
-                          horizontal: 'left',
-                        }}
-                        transformOrigin={{
-                          vertical: 'top',
-                          horizontal: 'left',
-                        }}
-                    >
-                    <List sx={{padding:0}}>
-                        {
-                            ordernarPorItems.map((order: OrdenarPorItem, index: number)=>(
-                        <ListItem disablePadding key={`order-item-${index}`}>
-                            <ListItemButton  divider onClick={()=> {
-                                handleOrderSelect(order);
-                                handleCloseOrderAction();}}>
-                                <ListItemText  primary={<span dangerouslySetInnerHTML={{ __html: order.title }}/>}/>
-                            </ListItemButton>
-                        </ListItem>
-                            )
-                            )
-                        }
-                    </List>
-                    </Popover>
+                <Grid item container xs={4} sm={2} sx={{display:{xs:'flex', sm:'none'}, justifyContent: 'flex-start', alignItems:'center'}}>
+                    <FilterModelsSelect  items={buttonFilterItems} handleSelected={handleButtonFilter} itemType={filterType}/>
+                </Grid>
+
+                <Grid item container xs={4} sm={2} sx={{display:'flex', justifyContent: 'flex-end', alignItems:'center', marginRight:{xs:-2, sm:0}}}>
+                    <OrderModels  items={ordernarPorItems} handleSelected={handleOrderSelect} itemType={orderType}/>
                 </Grid>
   
         </Box>

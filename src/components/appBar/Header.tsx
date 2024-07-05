@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { AppBar, Grid, IconButton, Toolbar, Typography, List, ListItem, ListItemText, Box } from "@mui/material";
+import { AppBar, Grid, IconButton, Toolbar, Typography, Box } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from "./sidebar/Sidebar";
+import Logo from "../../assets/images/Logo.png";
 
 import TabsComponent from "./pestañas/Tabs";
 
@@ -18,11 +19,17 @@ const Header: React.FC = () => {
 
     return (
         <>
-            <AppBar position="fixed" color="inherit" sx={{ height:'55px'}}>
-                <Toolbar style={{ justifyContent: 'space-between', alignItems:'center' }} sx={{ cursor: 'default' }}> 
-                        <Grid container display="flex" sx={{ cursor: 'default', display:'flex', justifyContent: 'start', alignItems: 'flex-end' }}>
-                            <TabsComponent/>
-                        </Grid>
+            <AppBar position="fixed" color="inherit" sx={{ height:'60px', boxShadow: 'none', borderBottom: '3px solid rgba(0, 0, 0, 0.1)'}}>
+                <Toolbar style={{ justifyContent: 'space-between', alignItems:'center', padding: '0 10px' }} sx={{ cursor: 'default' }}> 
+                <Grid sx={{ display: 'flex', justifyContent:'flex-start', alignItems: 'center' }}>
+                        <img src={Logo} alt="Logo" style={{ width: 'auto', height: '30px', marginLeft:'10px',marginRight: '40px' }} />
+                    </Grid>
+                    <Box sx={{display: {
+                                xs: 'none', 
+                                sm: 'flex', 
+                            }, flexGrow: 1, justifyContent: 'center', marginBottom:-0.4 }}>
+                        <TabsComponent />
+                    </Box>
                     <Grid container display="flex" sx={{ cursor: 'default', justifyContent: 'end', alignItems: 'center' }}>
                         <Typography
                             variant="h5"
@@ -36,7 +43,7 @@ const Header: React.FC = () => {
                             edge="end"
                             color="inherit"
                             aria-label="menu"
-                            sx={{ mr: 2, mt:0 }}
+                            sx={{ mr: 0}}
                             onClick={menuHandleClick(true)}
                         >
                             <MenuIcon />

@@ -4,7 +4,7 @@ import { Grid, Typography } from "@mui/material"
 const ServiciosYaccesorios: React.FC = () =>{
     return (
         <Grid>
-            <Grid textAlign="center" marginTop="4.5rem">
+            <Grid textAlign="center" marginTop={4}>
             <Typography>Servicios y Accesorios</Typography>
             </Grid>
         </Grid>

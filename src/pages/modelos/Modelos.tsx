@@ -41,9 +41,9 @@ const Modelos: React.FC = () =>{
     },[filter, order])
 
     return (
-        <>
+        <Grid container display='flex' direction='column' justifyContent='center'>
         {error ? 
-        <Grid
+        <Grid item
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -65,9 +65,13 @@ const Modelos: React.FC = () =>{
             </Typography>
         </Grid>
             :
-        <>
-            <Typography variant="h1">Descubrí todos los modelos</Typography>
-            <FilterModelsBar handleButtonFilter={handleButtonFilter} handleOrderSelect={handleOrderSelect}/>
+        <Grid item container sm={12} display='flex' justifyContent='center' direction='row' sx={{paddingRight:'15px'}}>
+            <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'start', paddingLeft:{xs:'0px',sm:'90px'}}}>
+            <Typography variant="h1" sx={{ fontWeight: 'bold' }}>Descubrí todos los modelos</Typography>
+            </Grid>
+            <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'center'}}>
+            <FilterModelsBar handleButtonFilter={handleButtonFilter} handleOrderSelect={handleOrderSelect} filterType={filter} orderType={order}/>
+            </Grid>
             {loading ?
             <Box  sx={{
                 height: 'calc(100vh - 300px)',
@@ -78,16 +82,16 @@ const Modelos: React.FC = () =>{
             <CircularProgress color="secondary" size={50}/>
             </Box>
             :
-            <Grid container display='flex' flexDirection='row' spacing={2}>
+            <Grid item container sx={{display:'flex', justifyContent:'start', marginLeft:5, marginRight:5}} >
             {models.map((model: Modelo, index: number)=>(
-                <Grid item md={3} sm={12} xs={12} key={`model-${model.id}`} >
+                <Grid item sm={3} xs={12} key={`model-${model.id}`} >
                     <ModeloCard modelo={model} />
                 </Grid>
             ))}
             </Grid>}
-        </>
+        </Grid>
         }
-        </>
+        </Grid>
     )
 }
 

@@ -22,8 +22,8 @@ const typography: TypographyOptions = {
   },
   h4: {
     fontWeight: 600,
-    fontSize: '14px',
-    lineHeight: '16px',
+    fontSize: '1.2rem',
+    lineHeight: '1.5',
   },
   h5: {
     fontWeight: 500,
@@ -32,9 +32,10 @@ const typography: TypographyOptions = {
   },
   h6: {
     fontWeight: 500,
-    fontSize: '0.875rem',
+    fontSize: '0.72rem',
     lineHeight: '1.5',
   },
+  
   button: {
     textTransform: 'none',
     fontWeight: '400',

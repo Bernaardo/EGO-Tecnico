@@ -22,16 +22,17 @@ const PageWrapper = experimentalStyled('div')(({ theme }) => ({
 const AppLayout: React.FC = () =>{
     return (
         <>
-            <Header/>
-            <PageWrapper>
+        <Header/>
+        <PageWrapper>
         <Container
           maxWidth={false}
           sx={{
             paddingTop: '20px',
             minWidth:  "95%",
+            justifyContent:'center'
           }}
         >
-          <Box sx={{ minHeight: 'calc(100vh - 170px)' }}>
+          <Box sx={{ minHeight: 'calc(100vh - 170px)', justifyContent:'center' }}>
             <Outlet />
           </Box>
         </Container>

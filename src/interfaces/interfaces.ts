@@ -25,6 +25,8 @@ export interface OrdenarPorItem {
 export interface FilterModelsProps{
     handleButtonFilter: (filter:ButtonFilterItem) => void;
     handleOrderSelect: (order:OrdenarPorItem) => void;
+    filterType:string | null;
+    orderType:string | null;
 }
 
 export interface Modelo {
@@ -81,4 +83,16 @@ export interface CustomArrowProps {
 
 export interface CarouselProps {
     data: ModelFeature[];
+}
+
+export interface OrderModelsProps {
+    items: OrdenarPorItem[];
+    handleSelected: (item: OrdenarPorItem) => void;
+    itemType: string | null;
+}
+
+export interface FilterModelsSelectProps {
+    items: ButtonFilterItem[];
+    handleSelected: (item: ButtonFilterItem) => void;
+    itemType: string | null;
 }
