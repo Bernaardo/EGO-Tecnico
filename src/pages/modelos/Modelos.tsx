@@ -42,28 +42,28 @@ const Modelos: React.FC = () =>{
 
     return (
         <Grid container display='flex' direction='column' justifyContent='center'>
-        {error ? 
-        <ServerError/>
-            :
-        <Grid item container sm={12} display='flex' justifyContent='center' direction='row' sx={{paddingRight:'15px'}}>
-            <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'start', paddingLeft:{xs:'0px',sm:'90px'}}}>
-            <Typography variant="h1" sx={{ fontWeight: 'bold' }}>Descubrí todos los modelos</Typography>
-            </Grid>
-            <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'center'}}>
-            <FilterModelsBar handleButtonFilter={handleButtonFilter} handleOrderSelect={handleOrderSelect} filterType={filter} orderType={order}/>
-            </Grid>
-            {loading ?
-            <Loading/>
-            :
-            <Grid item container sx={{display:'flex', justifyContent:'start', marginLeft:5, marginRight:5}} >
-            {models.map((model: Modelo, index: number)=>(
-                <Grid item sm={3} xs={12} key={`model-${model.id}`} >
-                    <ModeloCard modelo={model} />
+            <Grid item container sm={12} display='flex' justifyContent='center' direction='row' sx={{paddingRight:'15px'}}>
+                <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'start', paddingLeft:{xs:'0px',sm:'90px'}}}>
+                    <Typography variant="h1" sx={{ fontWeight: 'bold' }}>Descubrí todos los modelos</Typography>
                 </Grid>
-            ))}
-            </Grid>}
-        </Grid>
-        }
+                <Grid item xs={12} sm={12} sx={{display:'flex', justifyContent:'center'}}>
+                    <FilterModelsBar handleButtonFilter={handleButtonFilter} handleOrderSelect={handleOrderSelect} filterType={filter} orderType={order}/>
+                </Grid>
+
+                {loading ?
+                 <Loading/>
+                :
+                 error ? 
+                <ServerError/>
+                :
+                <Grid item container sx={{display:'flex', justifyContent:'start', marginLeft:5, marginRight:5}} >
+                {models.map((model: Modelo, index: number)=>(
+                    <Grid item sm={3} xs={12} key={`model-${model.id}`} >
+                        <ModeloCard modelo={model} />
+                    </Grid>
+                ))}
+                </Grid>}
+            </Grid>
         </Grid>
     )
 }

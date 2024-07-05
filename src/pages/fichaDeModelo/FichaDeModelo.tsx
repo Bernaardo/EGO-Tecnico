@@ -40,10 +40,10 @@ const FichaDeModelo: React.FC = () => {
 
   return (
     <Grid container spacing={2} justifyContent='center'>
-         {error ? 
-         <ServerError/>
-         : loading? 
+         {loading? 
          <Loading/>
+         : error ? 
+         <ServerError/>
          :
          <>
       <Grid item xs={12} sm={6}  sx={{marginBottom:4}}>
