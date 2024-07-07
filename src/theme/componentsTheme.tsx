@@ -62,7 +62,7 @@ const components: Components<Theme>={
   MuiCard: {
     styleOverrides: {
       root: (props) => ({
-        borderRadius: '0px',
+        borderRadius: '5px',
         padding: '3px',
         margin: '3px',
         boxShadow: props.theme.shadows[0],

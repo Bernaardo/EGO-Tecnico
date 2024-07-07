@@ -5,7 +5,6 @@ import Loadable from '../components/loader/Loadable';
 const AppLayout = Loadable(lazy(() => import("../layouts/AppLayout")));
 const Modelos = Loadable(lazy(() => import("../pages/modelos/Modelos")));
 const FichaDeModelo = Loadable(lazy(() => import("../pages/fichaDeModelo/FichaDeModelo")));
-const ServiciosYaccesorios = Loadable(lazy(() => import("../pages/servicioYaccesorios/ServiciosYaccesorios")));
 const Router = () =>{
     const router: RouteObject [] = [
         {
@@ -15,7 +14,6 @@ const Router = () =>{
               { path: '/', element: <Navigate to="/modelos" /> },
               { path: '/modelos', element: <Modelos />},
               { path: '/ficha-de-modelo/:id', element: <FichaDeModelo />},
-              { path: '/servicios-y-accesorios', element: <ServiciosYaccesorios />},
               { path: '*', element: <Navigate to="/" /> },
             ],
           },

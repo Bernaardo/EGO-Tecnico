@@ -16,11 +16,11 @@ const TabsComponent: React.FC = () =>{
     useEffect(()=>{
         
         const currentPath = location.pathname;
-        if (currentPath === "/modelos") {
-            setValue(0);
-        } else if(!isNaN(parseInt(currentPath.split("/")[2]))){
+        if (!isNaN(parseInt(currentPath.split("/")[2]))) {
             setValue(1);
-        }
+        } else if(currentPath === "/modelos"){
+            setValue(0);
+        } 
     },[location.pathname])
 
 

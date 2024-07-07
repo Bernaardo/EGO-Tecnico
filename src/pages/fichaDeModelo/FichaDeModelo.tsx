@@ -87,7 +87,9 @@ const FichaDeModelo: React.FC = () => {
     </Grid> 
 
       {modelo.model_highlights.map((highlight, index) => (
+        <Grid item xs={12} key={`highlight=${index}`} display='flex' justifyContent='center'>
         <Highlights highlight={highlight} index={index}/>
+        </Grid>
       ))}
       </>}
     </Grid>

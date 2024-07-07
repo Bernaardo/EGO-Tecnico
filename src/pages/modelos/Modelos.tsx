@@ -56,13 +56,13 @@ const Modelos: React.FC = () =>{
                  error ? 
                 <ServerError/>
                 :
-                <Grid item container sx={{display:'flex', justifyContent:'start', marginLeft:5, marginRight:5}} >
+                <>
                 {models.map((model: Modelo, index: number)=>(
-                    <Grid item sm={3} xs={12} key={`model-${model.id}`} >
+                    <Grid item xs={12} sm={6}  md={3} lg={2} key={`model-${model.id}`} display='flex' justifyContent='center' sx={{marginLeft:{sm:0, md:1, lg:4}, marginRight:{sm:0, md:1, lg:4}} }>
                         <ModeloCard modelo={model} />
                     </Grid>
                 ))}
-                </Grid>}
+                </>}
             </Grid>
         </Grid>
     )

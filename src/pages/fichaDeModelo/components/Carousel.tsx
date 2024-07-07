@@ -69,15 +69,15 @@ const Carousel: React.FC<CarouselProps> = ({ data }) => {
       <Box sx={{ margin: '0 auto', paddingLeft: '17px', paddingRight:'27px', justifyContent:'center', paddingBottom:'10px' }}>
         <Slider {...sliderProps} >
           {data.map((feature, index) => (
-             <Card sx={{ 
-                padding:0,
+             <Card 
+             key={`slider-${index}`}
+             sx={{ 
                 display: 'flex',
                 border: 'none', 
                 backgroundColor:'rgba(0, 0, 0, 0)',
                 '&:hover': {
                   boxShadow: 'none'},
-                  maxWidth: '300px',
-                  marginLeft:1.5, }}
+                  marginLeft:0, marginRight:2 }}
                   >
                 <CardMedia
                sx={{ height: "170px", objectFit: "contain", width: "100%",marginTop: 'auto', marginBottom: 'auto', borderRadius:3}}

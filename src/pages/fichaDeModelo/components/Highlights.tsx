@@ -5,7 +5,7 @@ import { stripHtml } from "../../../hooks/extraerHtml";
 const Highlights: React.FC <HighlightsProps>= ({highlight, index}) => {
     
     return (
-        <Grid item container display='flex' flexDirection={index % 2 !== 0 ? 'row' : 'row-reverse'} justifyContent='center' marginLeft={{sm: index % 2 !== 0 ? -2 : 4, xs:-2}} marginBottom={2} key={`highlight-${index}`}>
+        <Grid item container display='flex' flexDirection={index % 2 !== 0 ? 'row' : 'row-reverse'} justifyContent='center' marginLeft={{sm: index % 2 !== 0 ? -2 : 4, xs:-2}} marginBottom={2}>
           <Grid item xs={12} sm={5}>
             <Card 
               sx={{ 
