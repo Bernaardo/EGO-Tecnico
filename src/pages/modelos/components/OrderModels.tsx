@@ -41,8 +41,8 @@ const OrderModels: React.FC <OrderModelsProps>= ({items, handleSelected, itemTyp
                           horizontal: 'right',
                         }}
                         PaperProps={{ sx: { borderRadius: 0,
-                             width: '170px', 
-                            height: '193px' } }}
+                             width: '190px', 
+                            height: '194px' } }}
                     >
                     <List sx={{padding:0, margin:0}}>
                         {
