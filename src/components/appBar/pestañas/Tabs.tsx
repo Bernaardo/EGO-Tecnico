@@ -25,8 +25,8 @@ const TabsComponent: React.FC = () =>{
 
 
     return (
-    <Box sx={{display:'flex', alignItems:'end', minWidth:'300px',}}>
-        <Tabs value={value} >
+    <Box sx={{display:'flex', alignItems:'end', minWidth:'300px'}}>
+        <Tabs value={value} sx={{backgroundColor:'transparent'}}>
             {tabsItems.map((tab: TabItem, index: number)=>(
                 <Tab  key={`tabs-items-${index}`} disableTouchRipple label={tab.title} id={ `simple-tab-${index}`} aria-controls={ `simple-tabpanel-${index}`} disableFocusRipple  
                 sx={{ cursor: 'default', borderBottom: value===index?4:0,

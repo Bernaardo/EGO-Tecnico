@@ -49,7 +49,6 @@ const OrderModels: React.FC <OrderModelsProps>= ({items, handleSelected, itemTyp
                             items.map((item: OrdenarPorItem, index: number)=>(
                         <ListItem sx={{height:'35.7px', marginTop:0.3}} selected={item.ordering === itemType} disablePadding key={`order-item-${index}`}>
                             <ListItemButton 
-                                divider 
                                 onClick={()=> {
                                 handleSelected(item);
                                 handleCloseOrderAction();}}>

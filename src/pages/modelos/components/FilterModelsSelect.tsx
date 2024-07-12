@@ -50,7 +50,6 @@ const FilterModelsSelect: React.FC <FilterModelsSelectProps>= ({items, handleSel
                             items.map((item: ButtonFilterItem, index: number)=>(
                         <ListItem sx={{height:'35.7px', marginTop:0.3}} selected={(item.segment===itemType)} disablePadding key={`order-item-${index}`}>
                             <ListItemButton 
-                                divider 
                                 onClick={()=> {
                                 handleSelected(item);
                                 handleCloseOrderAction();}}>

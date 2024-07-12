@@ -51,6 +51,7 @@ const components: Components<Theme>={
       root: (props) => ({
         borderRadius: '0px',
         border:'none',
+        borderColor:props.theme.palette.primary.main,
         backgroundColor: props.theme.palette.primary.main,
         "&.Mui-selected": {
           backgroundColor: props.theme.palette.info.main,

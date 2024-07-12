@@ -27,7 +27,7 @@ const Header: React.FC = () => {
                     <Box sx={{display: {
                                 xs: 'none', 
                                 sm: 'flex', 
-                            }, flexGrow: 1, justifyContent: 'center', marginBottom:-0.4 }}>
+                            }, flexGrow: 1, justifyContent: 'center', marginBottom:-1 }}>
                         <TabsComponent />
                     </Box>
                     <Grid container display="flex" sx={{ cursor: 'default', justifyContent: 'end', alignItems: 'center' }}>
